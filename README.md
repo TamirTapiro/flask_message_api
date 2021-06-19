@@ -1,45 +1,48 @@
-# Python: Getting Started
+Message API with Flask Python
 
-A barebones Django app, which can easily be deployed to Heroku.
+Description:
+simple web-API for send / read / delete messages
 
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+base url: https://flaskmessageapi.herokuapp.com
 
-## Running Locally
-
-Make sure you have Python 3.9 [installed locally](https://docs.python-guide.org/starting/installation/). To push to Heroku, you'll need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), as well as [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
-
-```sh
-$ git clone https://github.com/heroku/python-getting-started.git
-$ cd python-getting-started
-
-$ python3 -m venv getting-started
-$ pip install -r requirements.txt
-
-$ createdb python_getting_started
-
-$ python manage.py migrate
-$ python manage.py collectstatic
-
-$ heroku local
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```sh
-$ heroku create
-$ git push heroku main
-
-$ heroku run python manage.py migrate
-$ heroku open
-```
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Python on Heroku, see these Dev Center articles:
-
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
+API:
+  Auth:
+    if you using the app for the first time, you have to log in - 
+    https://flaskmessageapi.herokuapp.com/api/auth/login - POST
+    body:
+    {
+      "email": "tamir@gmail.com" / "snir@gmail.com",
+      "password": "1234"
+    }
+    
+    in order to log out or change user use logout - 
+    https://flaskmessageapi.herokuapp.com/api/auth/logout - GET - no additional params
+    
+  Messages:
+    "/" - GET - https://flaskmessageapi.herokuapp.com/api/messages
+    get all messages for user
+    
+    "/incoming" - GET - https://flaskmessageapi.herokuapp.com/api/messages/incoming
+    get all incoming messages for user
+    
+    "/outgoing" - GET - https://flaskmessageapi.herokuapp.com/api/messages/outgoing
+    get all outgoing messages for user
+    
+    "/unread" - GET - https://flaskmessageapi.herokuapp.com/api/messages/unread
+    get all unreadden messages for user
+    
+    "/read_message" - GET - https://flaskmessageapi.herokuapp.com/api/messages/read_message
+    get the newest message received for the user
+    
+    "/write_message" - POST - https://flaskmessageapi.herokuapp.com/api/messages/write_message
+    write single message for someone
+    body:
+    {
+      "receiver": "111" / "222" //user_id
+      "subject": String,
+      "body": String
+    }
+    
+    "/delete/<oldest/newest>" - GET - https://flaskmessageapi.herokuapp.com/api/messages/delete/<which_one>
+    delete the oldest or the newest message
+    
