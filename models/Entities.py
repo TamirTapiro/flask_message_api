@@ -4,7 +4,7 @@ import uuid
 import ssl
 import json
 
-mongo_uri = "mongodb+srv://GoFrance10:GoFrance10@mydb.bwvcm.mongodb.net/"
+mongo_uri = "***"
 client = MongoClient(mongo_uri, ssl_cert_reqs=ssl.CERT_NONE)
 
 mydb = client["message_db"]
